@@ -3,7 +3,7 @@ import { Switch, Link, Route } from 'react-router-dom';
 import Login from './Components/Login';
 import Splash from './Layout/Splash';
 import Home from './Layout/Home';
-import './App.css';
+import './css/style.css';
 
 class App extends React.Component {
   state = {

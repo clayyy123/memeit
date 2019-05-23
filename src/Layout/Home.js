@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Chat from '../Components/Chat';
 
 class Home extends Component {
   state = {
@@ -8,7 +9,12 @@ class Home extends Component {
   componentDidMount() {}
 
   render() {
-    return <h1>Welcome {this.props.user}</h1>;
+    return (
+      <div class="home">
+        <h1 class="home__title">Welcome {this.props.user}</h1>
+        <Chat user={this.props.user} />
+      </div>
+    );
   }
 }
 

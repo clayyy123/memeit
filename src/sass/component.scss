@@ -1,0 +1,25 @@
+//###########################
+//CHAT BOX###################
+.chat {
+  height: 30rem;
+  width: 35rem;
+  border: 0.1rem solid black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  &__window {
+    height: 25rem;
+    width: 33rem;
+    border: 0.1rem solid black;
+    overflow: scroll;
+  }
+
+  &__box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}
