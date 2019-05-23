@@ -10,6 +10,16 @@ class App extends React.Component {
     user: ''
   };
 
+  componentDidMount() {
+    const name = localStorage.getItem('user');
+    console.log(name, 'localstorage');
+    if (name) {
+      this.setState({
+        user: name
+      });
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -17,7 +27,7 @@ class App extends React.Component {
           <Route
             path="/home"
             render={props => {
-              return <Home {...props} />;
+              return <Home {...props} user={this.state.user} />;
             }}
           />
           <Route
@@ -32,6 +42,7 @@ class App extends React.Component {
   }
 
   getUser = name => {
+    localStorage.setItem('user', name);
     this.setState({
       user: name
     });

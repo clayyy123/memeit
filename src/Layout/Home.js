@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
 class Home extends Component {
-  state = {};
+  state = {
+    name: ''
+  };
+
+  componentDidMount() {}
 
   render() {
-    return <h1>Home</h1>;
+    return <h1>Welcome {this.props.user}</h1>;
   }
 }
 

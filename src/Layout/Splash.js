@@ -11,8 +11,9 @@ class Splash extends Component {
     });
   };
 
-  memeHandler = str => {
-    this.props.getUser(str);
+  memeHandler = e => {
+    e.preventDefault();
+    this.props.getUser(this.state.username);
     this.props.history.push('/home');
   };
 
@@ -22,19 +23,15 @@ class Splash extends Component {
     return (
       <div class="splash">
         <h1 class="splash__title">Can you Meme?</h1>
-        <input
-          type="text"
-          name="username"
-          value={this.state.username}
-          onChange={this.changeHandler}
-        />
-        <button
-          onClick={() => {
-            this.memeHandler(username);
-          }}
-        >
-          Let's Meme
-        </button>
+        <form onSubmit={this.memeHandler}>
+          <input
+            type="text"
+            name="username"
+            value={this.state.username}
+            onChange={this.changeHandler}
+          />
+          <button>Let's Meme</button>
+        </form>
       </div>
     );
   }
