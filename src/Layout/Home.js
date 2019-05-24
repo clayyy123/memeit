@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Chat from '../Components/Chat';
+import Banner from '../Components/Banner';
+import Score from '../Components/Highscore';
+import Room from '../Components/Rooms';
 
 class Home extends Component {
   state = {
@@ -11,8 +14,16 @@ class Home extends Component {
   render() {
     return (
       <div class="home">
-        <h1 class="home__title">Welcome {this.props.user}</h1>
-        <Chat user={this.props.user} />
+        <div class="home__left">
+          <Room />
+        </div>
+        <div class="home__middle">
+          <Banner user={this.props.user} />
+          <Score />
+        </div>
+        <div class="home__right">
+          <Chat user={this.props.user} />
+        </div>
       </div>
     );
   }

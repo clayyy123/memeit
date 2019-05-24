@@ -1,21 +1,49 @@
+.home {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center; }
+  .home__left {
+    flex: 0 0 30%;
+    border: 0.1rem solid black; }
+  .home__middle {
+    flex: 0 0 40%;
+    border: 0.1rem solid black; }
+  .home__right {
+    flex: 1;
+    border: 0.1rem solid black; }
+
 .chat {
-  height: 30rem;
-  width: 35rem;
+  height: 100%;
+  width: 100%;
   border: 0.1rem solid black;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center; }
-  .chat__window {
-    height: 25rem;
-    width: 33rem;
-    border: 0.1rem solid black;
-    overflow: scroll; }
   .chat__box {
+    height: 100%;
+    width: 100%;
+    padding: 0.3rem 1rem;
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    align-items: center; }
+    align-self: center;
+    justify-content: center; }
+  .chat__window {
+    overflow: scroll;
+    flex: 0 0 80%; }
+  .chat__form {
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+    .chat__form textarea {
+      flex: 0 0 60%;
+      resize: none; }
+    .chat__form input {
+      flex: 1;
+      align-self: flex-end;
+      width: 30%;
+      margin: 0.5rem; }
 
 *,
 *:before,
