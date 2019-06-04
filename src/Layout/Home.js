@@ -6,10 +6,22 @@ import Room from '../Components/Rooms';
 
 class Home extends Component {
   state = {
-    name: ''
+    name: {}
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    const name = localStorage.getItem('user');
+    const parsed = JSON.parse(name);
+    console.log(name, 'localstorage');
+    if (name) {
+      this.setState({
+        user: parsed
+      });
+    }
+    if (!name) {
+      this.props.history.push('/');
+    }
+  }
 
   render() {
     return (
@@ -18,7 +30,7 @@ class Home extends Component {
           <Room />
         </div>
         <div class="home__middle">
-          <Banner user={this.props.user} />
+          <Banner user={this.props.user} changeName={this.props.changeName} />
           <Score />
         </div>
         <div class="home__right">

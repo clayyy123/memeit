@@ -5,6 +5,10 @@ class Splash extends Component {
     username: ''
   };
 
+  componentDidMount() {
+    console.log('splash mounted');
+  }
+
   changeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -13,12 +17,22 @@ class Splash extends Component {
 
   memeHandler = e => {
     e.preventDefault();
-    this.props.getUser(this.state.username);
+    this.props.getUser({ name: this.state.username, id: this.hashHandler(8) });
     this.props.history.push('/home');
   };
 
+  hashHandler = length => {
+    let result = '';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
   render() {
-    console.log(this.props);
     const { username } = this.state;
     return (
       <div class="splash">
@@ -27,7 +41,7 @@ class Splash extends Component {
           <input
             type="text"
             name="username"
-            value={this.state.username}
+            value={username}
             onChange={this.changeHandler}
           />
           <button>Let's Meme</button>

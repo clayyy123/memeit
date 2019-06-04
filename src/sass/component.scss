@@ -34,6 +34,10 @@
     textarea {
       flex: 0 0 60%;
       resize: none;
+
+      &:focus {
+        outline: none;
+      }
     }
 
     input {
@@ -43,4 +47,40 @@
       margin: 0.5rem;
     }
   }
+}
+
+//#######################
+//##### R O O M S ########
+.rooms {
+  position: relative;
+  height: 100%;
+}
+
+.modalOn {
+  background-color: rgba(0, 0, 0, 0.795);
+}
+
+//###################
+.banner {
+  flex: 0 0 40%;
+  text-align: center;
+}
+.board {
+  flex: 1;
+}
+
+//#####################
+//#######M O D A L ####
+.modal {
+  height: 20rem;
+  width: 20rem;
+  border: 0.1rem solid black;
+  position: absolute;
+  right: 0;
+  margin: auto;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: white;
 }

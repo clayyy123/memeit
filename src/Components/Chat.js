@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import io from 'socket.io-client';
+const socket = io('http://localhost:3001');
 
 class Chat extends Component {
   state = {
@@ -8,6 +10,12 @@ class Chat extends Component {
     },
     history: []
   };
+
+  componentDidMount() {
+    socket.on('connect', socket => {
+      console.log('user connected from client');
+    });
+  }
 
   render() {
     return (
@@ -28,7 +36,7 @@ class Chat extends Component {
             <textarea
               type="text"
               name="message"
-              maxlength="100"
+              maxLength="100"
               value={this.state.messageObj.message}
               onChange={this.sendHandler}
             />
@@ -44,29 +52,20 @@ class Chat extends Component {
     );
   }
 
-  // changeHandler = e => {
-  //   this.setState({
-  //     messageObj: {
-  //       ...this.state.messageObj,
-  //       [e.target.name]: e.target.value
-  //     }
-  //   });
-  // };
-
   sendHandler = e => {
     const { message } = this.state.messageObj;
     e.persist();
     if (
       (e.keyCode === 13 && message.trim() !== '') ||
-      e.nativeEvent.type === 'click'
+      (e.nativeEvent.type === 'click' && message.trim() !== '')
     ) {
       let messageObj = {
-        user: this.props.user,
+        user: this.props.user.name,
         message: message
       };
       this.setState({
         messageObj: {
-          user: this.props.user,
+          user: '',
           message: ''
         },
         history: [...this.state.history, messageObj]
