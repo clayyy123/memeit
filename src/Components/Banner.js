@@ -2,10 +2,23 @@ import React, { Component } from 'react';
 
 class Banner extends Component {
   state = {
-    name: {}
+    user: {
+      name: '',
+      id: ''
+    }
   };
+
+  componentDidMount() {
+    this.setState({
+      user: {
+        name: '',
+        id: this.props.user.id
+      }
+    });
+  }
+
   render() {
-    const { name } = this.state;
+    const { user } = this.state;
     return (
       <div class="banner">
         <h1>Can you MEME?</h1>
@@ -15,7 +28,7 @@ class Banner extends Component {
             type="text"
             name="name"
             onChange={this.changeHandler}
-            value={name.name}
+            value={user.name}
           />
           <button onClick={this.nameHandler}>Update</button>
         </div>
@@ -24,10 +37,10 @@ class Banner extends Component {
   }
 
   nameHandler = () => {
-    this.props.changeName(this.state.name);
+    this.props.changeName(this.state.user);
     this.setState({
-      name: {
-        ...this.state.name,
+      user: {
+        ...this.state.user,
         name: ''
       }
     });
@@ -35,8 +48,8 @@ class Banner extends Component {
 
   changeHandler = e => {
     this.setState({
-      name: {
-        ...this.state.name,
+      user: {
+        ...this.state.user,
         [e.target.name]: e.target.value
       }
     });

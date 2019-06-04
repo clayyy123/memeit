@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from './RoomModal';
+import io from 'socket.io-client';
+const socket = io('http://localhost:3001');
 
 class Rooms extends Component {
   state = {
@@ -8,7 +10,9 @@ class Rooms extends Component {
     rooms: []
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   modalOpen = () => {
     this.setState({
@@ -22,6 +26,12 @@ class Rooms extends Component {
     });
   };
 
+  createHandler = room => {
+    console.log(room);
+    socket.emit('create-room', { data: room });
+    this.props.props.history.push('/room');
+  };
+
   render() {
     const { isOpen, rooms } = this.state;
     const classNames = isOpen ? 'rooms modalOn' : 'rooms';
@@ -29,11 +39,19 @@ class Rooms extends Component {
       <div class={classNames}>
         <h1>Rooms</h1>
         {this.state.isOpen ? (
-          <Modal modalClose={this.modalClose} />
+          <Modal
+            modalClose={this.modalClose}
+            create={this.createHandler}
+            user={this.props.user}
+          />
         ) : (
           <button onClick={this.modalOpen}>Create a Room!</button>
         )}
-        {rooms}
+        <ul>
+          {/* {rooms.map((r, i) => {
+            return <li>{r.name}</li>;
+          })} */}
+        </ul>
       </div>
     );
   }

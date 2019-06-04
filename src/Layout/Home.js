@@ -27,7 +27,7 @@ class Home extends Component {
     return (
       <div class="home">
         <div class="home__left">
-          <Room />
+          <Room props={this.props} user={this.props.user} />
         </div>
         <div class="home__middle">
           <Banner user={this.props.user} changeName={this.props.changeName} />
