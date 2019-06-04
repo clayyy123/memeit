@@ -15,6 +15,19 @@ class Chat extends Component {
     socket.on('connect', socket => {
       console.log('user connected from client');
     });
+
+    socket.on('message', data => {
+      console.log(data.data);
+      console.log(this.refs);
+      this.setState(
+        {
+          history: [...this.state.history, data.data]
+        },
+        () => {
+          this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
+        }
+      );
+    });
   }
 
   render() {
@@ -22,7 +35,7 @@ class Chat extends Component {
       <div class="chat">
         <h1 class="chat__title">Chat</h1>
         <div class="chat__box">
-          <div class="chat__window">
+          <div class="chat__window" ref="chatWindow">
             {/* maps out the chat */}
             {this.state.history.map((m, i) => {
               return (
@@ -63,12 +76,12 @@ class Chat extends Component {
         user: this.props.user.name,
         message: message
       };
+      socket.emit('new-message', { data: messageObj });
       this.setState({
         messageObj: {
           user: '',
           message: ''
-        },
-        history: [...this.state.history, messageObj]
+        }
       });
     } else {
       this.setState({

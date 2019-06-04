@@ -4,8 +4,11 @@ import Modal from './RoomModal';
 
 class Rooms extends Component {
   state = {
-    isOpen: false
+    isOpen: false,
+    rooms: []
   };
+
+  componentDidMount() {}
 
   modalOpen = () => {
     this.setState({
@@ -20,7 +23,8 @@ class Rooms extends Component {
   };
 
   render() {
-    const classNames = this.state.isOpen ? 'rooms modalOn' : 'rooms';
+    const { isOpen, rooms } = this.state;
+    const classNames = isOpen ? 'rooms modalOn' : 'rooms';
     return (
       <div class={classNames}>
         <h1>Rooms</h1>
@@ -29,6 +33,7 @@ class Rooms extends Component {
         ) : (
           <button onClick={this.modalOpen}>Create a Room!</button>
         )}
+        {rooms}
       </div>
     );
   }
