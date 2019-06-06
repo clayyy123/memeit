@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from './RoomModal';
-import io from 'socket.io-client';
-const socket = io('http://localhost:3001');
+// import io from 'socket.io-client';
+// const socket = io('http://localhost:3001');
 
 class Rooms extends Component {
   state = {
@@ -27,6 +27,7 @@ class Rooms extends Component {
   };
 
   createHandler = room => {
+    const { socket } = this.props;
     console.log(room);
     socket.emit('create-room', { data: room });
     this.props.props.history.push('/room');

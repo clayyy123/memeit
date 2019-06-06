@@ -6,6 +6,7 @@ import Home from './Layout/Home';
 import Room from './Layout/Room';
 import Start from './Layout/Start';
 import './css/style.css';
+import socket from './Components/Socket';
 
 class App extends React.Component {
   state = {
@@ -36,6 +37,7 @@ class App extends React.Component {
                   {...props}
                   user={this.state.user}
                   changeName={this.getUser}
+                  socket={socket}
                 />
               );
             }}
@@ -43,7 +45,13 @@ class App extends React.Component {
           <Route
             path="/room"
             render={props => {
-              return <Room {...props} getUser={this.getUser} />;
+              return (
+                <Room
+                  {...props}
+                  getUser={this.getUser}
+                  socket={this.props.socket}
+                />
+              );
             }}
           />
           <Route

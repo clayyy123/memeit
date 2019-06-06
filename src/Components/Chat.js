@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import io from 'socket.io-client';
-const socket = io('http://localhost:3001');
+import socket from './Socket';
 
 class Chat extends Component {
   state = {
@@ -8,20 +7,50 @@ class Chat extends Component {
       user: '',
       message: ''
     },
-    history: []
+    history: [{ user: 'ChatBot', message: 'Welcome to the Chat Room!' }]
   };
 
   componentDidMount() {
-    socket.on('connect', socket => {
+    const { user } = this.props;
+    socket.on('connect', () => {
       console.log('user connected from client');
     });
 
     socket.on('message', data => {
-      console.log(data.data);
-      console.log(this.refs);
       this.setState(
         {
           history: [...this.state.history, data.data]
+        },
+        () => {
+          this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
+        }
+      );
+    });
+
+    socket.on('user', data => {
+      console.log(data.data.name);
+      let userName = {
+        user: 'Chatbot',
+        message: data.data.name + ' joined the room'
+      };
+      this.setState(
+        {
+          history: [...this.state.history, userName]
+        },
+        () => {
+          this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
+        }
+      );
+    });
+
+    socket.on('user-disconnect', data => {
+      let userName = {
+        user: 'Chatbot',
+        message: data.data + ' left the room'
+      };
+      this.setState(
+        {
+          history: [...this.state.history, userName]
         },
         () => {
           this.refs.chatWindow.scrollTop = this.refs.chatWindow.scrollHeight;
@@ -66,6 +95,7 @@ class Chat extends Component {
   }
 
   sendHandler = e => {
+    // const { socket } = this.props;
     const { message } = this.state.messageObj;
     e.persist();
     if (

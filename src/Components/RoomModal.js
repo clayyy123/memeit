@@ -25,14 +25,19 @@ class Modal extends Component {
     const { modalClose } = this.props;
     return (
       <div className="modal">
-        <p onClick={modalClose}>close</p>
+        <p className="modal__close" onClick={modalClose}>
+          close
+        </p>
         <input
           placeholder="room name"
           name="name"
           value={this.state.name}
           onChange={this.changeHandler}
+          className="modal__input"
         />
-        <button onClick={this.createRoomHandler}>Create</button>
+        <button className="modal__create" onClick={this.createRoomHandler}>
+          Create
+        </button>
       </div>
     );
   }
