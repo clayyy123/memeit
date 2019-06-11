@@ -26,6 +26,10 @@
     flex: 0 0 80%;
   }
 
+  &__message {
+    margin-bottom: 0.5rem;
+  }
+
   &__form {
     flex: 1;
     display: flex;

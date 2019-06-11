@@ -39,6 +39,8 @@
   .chat__window {
     overflow: scroll;
     flex: 0 0 80%; }
+  .chat__message {
+    margin-bottom: 0.5rem; }
   .chat__form {
     flex: 1;
     display: flex;
