@@ -5,6 +5,7 @@ import Score from '../Components/Highscore';
 import Room from '../Components/Rooms';
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3001');
+import socket from '../Components/Socket';
 
 class Home extends Component {
   state = {
@@ -12,18 +13,17 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    const { socket } = this.props;
-    const name = localStorage.getItem('user');
-    const parsed = JSON.parse(name);
-    console.log(name, 'localstorage');
-    if (name) {
-      socket.emit('new-user', { data: parsed });
-      this.setState({
-        user: parsed
-      });
-    } else if (!name) {
-      this.props.history.push('/');
-    }
+    // const name = localStorage.getItem('user');
+    // const parsed = JSON.parse(name);
+    // console.log(name, 'localstorage');
+    // if (name) {
+    //   socket.emit('new-user', { data: parsed });
+    //   this.setState({
+    //     user: parsed
+    //   });
+    // } else if (!name) {
+    //   this.props.history.push('/');
+    // }
   }
 
   render() {

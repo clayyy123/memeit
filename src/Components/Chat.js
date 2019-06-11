@@ -44,6 +44,7 @@ class Chat extends Component {
     });
 
     socket.on('user-disconnect', data => {
+      console.log(data);
       let userName = {
         user: 'Chatbot',
         message: data.data + ' left the room'

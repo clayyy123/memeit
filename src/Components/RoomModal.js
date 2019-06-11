@@ -9,16 +9,29 @@ class Modal extends Component {
     const { modalClose, create } = this.props;
     const obj = {
       name: this.state.name,
-      user: this.props.user
+      creator: this.props.user,
+      roomID: this.hashHandler(5),
+      occupied: 1
     };
-    modalClose();
     create(obj);
+    modalClose();
   };
 
   changeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
+  };
+
+  hashHandler = length => {
+    let result = '';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   };
 
   render() {

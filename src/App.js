@@ -15,14 +15,14 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const name = localStorage.getItem('user');
-    const parsed = JSON.parse(name);
-    console.log(name, 'localstorage');
-    if (name) {
-      this.setState({
-        user: parsed
-      });
-    }
+    // const name = localStorage.getItem('user');
+    // const parsed = JSON.parse(name);
+    // console.log(name, 'localstorage');
+    // if (name) {
+    //   this.setState({
+    //     user: parsed
+    //   });
+    // }
   }
 
   render() {
@@ -73,6 +73,7 @@ class App extends React.Component {
 
   getUser = name => {
     localStorage.setItem('user', JSON.stringify(name));
+    socket.emit('new-user', { data: name });
     this.setState({
       user: name
     });

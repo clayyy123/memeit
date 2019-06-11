@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from './RoomModal';
-// import io from 'socket.io-client';
-// const socket = io('http://localhost:3001');
+import socket from './Socket';
 
 class Rooms extends Component {
   state = {
     isOpen: false,
-    rooms: []
+    rooms: [],
+    room: ''
   };
 
   componentDidMount() {
     console.log(this.props);
+    socket.on('new-room', data => {
+      console.log(data);
+      if (this.props.user.id !== data.data.creator.id) {
+        this.setState({
+          rooms: [...this.state.rooms, data.data]
+        });
+      }
+    });
   }
 
   modalOpen = () => {
@@ -27,10 +35,18 @@ class Rooms extends Component {
   };
 
   createHandler = room => {
-    const { socket } = this.props;
-    console.log(room);
     socket.emit('create-room', { data: room });
     this.props.props.history.push('/room');
+  };
+
+  showButtonHandler = room => {
+    this.setState({
+      room: room
+    });
+  };
+
+  joinHandler = room => {
+    // socke
   };
 
   render() {
@@ -48,11 +64,22 @@ class Rooms extends Component {
         ) : (
           <button onClick={this.modalOpen}>Create a Room!</button>
         )}
-        <ul>
-          {/* {rooms.map((r, i) => {
-            return <li>{r.name}</li>;
-          })} */}
-        </ul>
+        <div>
+          {rooms.map((r, i) => {
+            return (
+              <div
+                key={i}
+                onClick={() => {
+                  this.showButtonHandler(r.name);
+                }}
+              >
+                {r.name}
+                {r.occupied + '/10'}
+                {this.state.room === r.name && <button>Join</button>}
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
