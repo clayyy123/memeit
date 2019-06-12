@@ -46,8 +46,8 @@ class Rooms extends Component {
   };
 
   joinHandler = room => {
-    socket.emit('joining', room);
-    this.props.props.push('/room');
+    socket.emit('joining', { room, user: this.props.user });
+    this.props.props.history.push('/room');
   };
 
   render() {
@@ -75,9 +75,15 @@ class Rooms extends Component {
                 }}
               >
                 {r.name}
-                {r.occupied + '/10'}
+                {r.occupied + ' /10'}
                 {this.state.room === r.name && (
-                  <button onClick={this.joinHandler(r)}>Join</button>
+                  <button
+                    onClick={() => {
+                      this.joinHandler(r);
+                    }}
+                  >
+                    Join
+                  </button>
                 )}
               </div>
             );

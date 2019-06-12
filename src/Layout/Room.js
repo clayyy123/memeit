@@ -9,6 +9,7 @@ class Room extends Component {
 
   componentDidMount() {
     socket.on('players', data => {
+      console.log(data);
       this.setState({
         primary: this.props.user,
         players: data.data
