@@ -37,7 +37,6 @@ class App extends React.Component {
                   {...props}
                   user={this.state.user}
                   changeName={this.getUser}
-                  socket={socket}
                 />
               );
             }}
@@ -50,6 +49,7 @@ class App extends React.Component {
                   {...props}
                   getUser={this.getUser}
                   socket={this.props.socket}
+                  user={this.state.user}
                 />
               );
             }}
