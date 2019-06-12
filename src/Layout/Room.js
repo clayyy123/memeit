@@ -22,7 +22,7 @@ class Room extends Component {
       <div className="room">
         <h1>Room</h1>
         {players.map((p, i) => {
-          return <div>{p.name}</div>;
+          return <div key={i}>{p.name}</div>;
         })}
       </div>
     );

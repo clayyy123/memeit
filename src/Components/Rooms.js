@@ -11,14 +11,28 @@ class Rooms extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     socket.on('new-room', data => {
       console.log(data);
       if (this.props.user.id !== data.data.creator.id) {
         this.setState({
-          rooms: [...this.state.rooms, data.data]
+          rooms: [...this.state.rooms, data]
         });
       }
+    });
+
+    if (this.props.user) {
+      socket.emit('roomMounted');
+    }
+
+    socket.on('populateRooms', data => {
+      this.setState(
+        {
+          rooms: data
+        },
+        () => {
+          console.log(this.state.rooms);
+        }
+      );
     });
   }
 
@@ -74,9 +88,9 @@ class Rooms extends Component {
                   this.showButtonHandler(r.name);
                 }}
               >
-                {r.name}
-                {r.occupied + ' /10'}
-                {this.state.room === r.name && (
+                {r.data.name}
+                {r.data.occupied + ' /10'}
+                {this.state.room === r.data.name && (
                   <button
                     onClick={() => {
                       this.joinHandler(r);

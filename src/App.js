@@ -7,6 +7,7 @@ import Room from './Layout/Room';
 import Start from './Layout/Start';
 import './css/style.css';
 import socket from './Components/Socket';
+import Test from './Components/test';
 
 class App extends React.Component {
   state = {
@@ -28,6 +29,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        {/* <Test /> */}
         <Switch>
           <Route
             path="/home"

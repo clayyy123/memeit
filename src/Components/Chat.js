@@ -11,11 +11,6 @@ class Chat extends Component {
   };
 
   componentDidMount() {
-    const { user } = this.props;
-    socket.on('connect', () => {
-      console.log('user connected from client');
-    });
-
     socket.on('message', data => {
       this.setState(
         {
@@ -28,7 +23,6 @@ class Chat extends Component {
     });
 
     socket.on('user', data => {
-      console.log(data.data.name);
       let userName = {
         user: 'Chatbot',
         message: data.data.name + ' joined the room'
@@ -44,7 +38,6 @@ class Chat extends Component {
     });
 
     socket.on('user-disconnect', data => {
-      console.log(data);
       let userName = {
         user: 'Chatbot',
         message: data.data + ' left the room'
