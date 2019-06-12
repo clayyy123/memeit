@@ -46,7 +46,8 @@ class Rooms extends Component {
   };
 
   joinHandler = room => {
-    // socke
+    socket.emit('joining', room);
+    this.props.props.push('/room');
   };
 
   render() {
@@ -75,7 +76,9 @@ class Rooms extends Component {
               >
                 {r.name}
                 {r.occupied + '/10'}
-                {this.state.room === r.name && <button>Join</button>}
+                {this.state.room === r.name && (
+                  <button onClick={this.joinHandler(r)}>Join</button>
+                )}
               </div>
             );
           })}
